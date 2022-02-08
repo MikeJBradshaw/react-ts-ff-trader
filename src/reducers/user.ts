@@ -1,4 +1,4 @@
-import { UPDATE_USER, UPDATE_USERNAME, LOG_OUT } from '../actions/user';
+import { UPDATE_USER, UPDATE_USERNAME, LOG_OUT, USER_ERROR, LOAD_USER } from '../actions/user';
 import type { Reducer } from 'redux';
 import type { UserAction, User } from '../actions/user';
 
@@ -6,6 +6,7 @@ import type { UserAction, User } from '../actions/user';
 interface UserState {
     username: string;
     user?: User;
+    errorMessage?: string;
 }
 
 
@@ -18,6 +19,14 @@ if (userObject) {
 const userReducer: Reducer<UserState, UserAction> = (state = {username: user?.username ?? '', user}, action) => {
     console.log(action);
     switch(action.type) {
+        case LOAD_USER:
+            const { errorMessage, ...newState } = state;
+            return newState;
+
+        case LOG_OUT:
+            window.localStorage.removeItem('user');
+            return {username: ''};
+
         case UPDATE_USERNAME:
             return {...state, username: action.username};
 
@@ -25,9 +34,8 @@ const userReducer: Reducer<UserState, UserAction> = (state = {username: user?.us
             window.localStorage.setItem('user', JSON.stringify(action.user));
             return {...state, user: action.user};
 
-        case LOG_OUT:
-            window.localStorage.removeItem('user');
-            return {username: ''};
+        case USER_ERROR:
+            return {...state, errorMessage: action.message};
 
         default:
             return state;

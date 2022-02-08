@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import { Dashboard } from '../actions/dashboard';
 import type { FunctionComponent } from 'react';
 
 
