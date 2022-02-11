@@ -10,7 +10,7 @@ const epicMiddleware = createEpicMiddleware();
 
 // set up the store
 const store = createStore(reducers, applyMiddleware(epicMiddleware));
-epicMiddleware.run(combineEpics<any>(dashboardEpic, userEpic));
+epicMiddleware.run(combineEpics<any>(dashboardEpic as any, userEpic));
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;          

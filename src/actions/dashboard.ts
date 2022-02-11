@@ -1,10 +1,26 @@
 import type { User } from './user';
 
 
+export interface Transaction {
+    creator: string;
+    status: string;
+    type: string;
+};
+
+
+export interface UserStat {
+    user_id: string;
+    trades: number;
+    balance: number;
+    avatar: string;
+    display_name: string;
+};
+
+
 export interface DashboardData {
-    league: {};
     owners: User[];
-    transactions: any[];
+    userStats: UserStat;
+    stats: UserStat[];
 };
 
 

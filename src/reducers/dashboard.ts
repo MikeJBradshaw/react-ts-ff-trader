@@ -1,17 +1,21 @@
-import { DISPLAY_DATA, LEAGUE_ERROR, LOAD_DATA } from '../actions/dashboard';
+import { DISPLAY_DATA, INIT, LEAGUE_ERROR, LOAD_DATA } from '../actions/dashboard';
 import type { Reducer } from 'redux';
 import type { DashboardData, DashboardAction } from '../actions/dashboard';
 
 
 interface DashboardState {
-    data: DashboardData;
+    data?: DashboardData;
     errorMessage?: string;
+    loading?: boolean;
 }
 
-const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {data: {league: {}, owners: [], transactions: []}}, action) => {
+const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {}, action) => {
         switch(action.type) {
             case DISPLAY_DATA:
-                return {...state, data: action.data};
+                return {...state, data: action.data, loading: false};
+
+            case INIT:
+                return {...state, loading: true};
 
             case LEAGUE_ERROR:
                 return {...state, errorMessage: action.message};
