@@ -17,7 +17,6 @@ if (userObject) {
 }
 
 const userReducer: Reducer<UserState, UserAction> = (state = {username: user?.username ?? '', user}, action) => {
-    console.log(action);
     switch(action.type) {
         case LOAD_USER:
             const { errorMessage, ...newState } = state;
