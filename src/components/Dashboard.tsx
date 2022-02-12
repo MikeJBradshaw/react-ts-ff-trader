@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Alert } from 'antd';
+import { Alert, Spin, Row, Col } from 'antd';
 import Summary from './Summary';
 import Trades from './Trades';
 import { displayData, init } from '../actions/dashboard';
@@ -29,7 +29,11 @@ const Dashboard: FunctionComponent<ConnectedProps<typeof connector> & {user: Use
             <Summary user={user} stats={data.userStats} logout={logOut} />
             <Trades transactions={data.stats} />
         </div>}
-        {loading && <div>loading</div>}
+        {loading && <Row>
+            <Col span={12} offset={6}>
+                <Spin size="large" />
+            </Col>
+        </Row>}
         {errorMessage && <Alert message={errorMessage} type="error" />}
     </>);
 };

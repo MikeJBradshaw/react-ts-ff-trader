@@ -11,7 +11,7 @@ import type { RootState } from '../store';
 
 
 const LEAGUE_ID = '723321264051175424';
-const ALLOWED_TRADES = 15;
+const ALLOWED_TRADES = 25;
 const TRADE_COST = 2;
 
 

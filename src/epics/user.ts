@@ -15,8 +15,12 @@ const loadUserEpic = (action$: Observable<LoadUserAction | UserErrorAction>, sta
     switchMap(() => fromFetch(
         `https://api.sleeper.app/v1/user/${state$.value.user.username}`,
         {selector: res => res.json()}
-    )),
-    map(updateUser),
+    ).pipe(map(user => {
+        if (!user) {
+            return userError('Username not found');
+        }
+        return updateUser(user);
+    }))),
     catchError(err => of(userError(err.message)))
 );
 

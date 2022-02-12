@@ -1,4 +1,4 @@
-import { Form, Input, Button, Alert } from 'antd';
+import { Input, Button, Alert, Row, Col } from 'antd';
 import { updateUsername, loadUser } from '../actions/user';
 import { connect } from 'react-redux';
 import type { ConnectedProps } from 'react-redux';
@@ -13,15 +13,29 @@ const connector = connect(
 const UserLogon: FunctionComponent<ConnectedProps<typeof connector>> = ({
     username, updateUsername, loadUser, errorMessage
 }) => (<>
-    <div className="user-logon-form">
-        <Form.Item label="Username">
-            <Input onChange={(e) => updateUsername(e.target.value)} value={username} />
-        </Form.Item>
-        <Button type="primary" onClick={loadUser}>
-            Get Me!
-        </Button>
-    </div>
-    {errorMessage && <Alert message={errorMessage} type="error" />}
+    <Row className="user-logon-form"> 
+        <Col span={12} offset={6}>
+            <Input
+                onChange={(e) => updateUsername(e.target.value)}
+                placeholder="Sleeper Name"
+                value={username} />
+            <Button 
+                className="user-logon-button"
+                type="primary"
+                onClick={loadUser}
+                disabled={!username}>
+                    Get Me!
+            </Button>
+        </Col>
+    </Row>
+    {
+        errorMessage &&
+        <Row>
+            <Col span={12} offset={6}>
+                <Alert message="Error" description={errorMessage} type="error" showIcon />
+            </Col>
+        </Row>
+    }
 </>);
 
 
