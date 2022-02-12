@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-ts-ff-trader/static/css/main.6577266a.css",
-    "main.js": "/react-ts-ff-trader/static/js/main.625b074a.js",
+    "main.js": "/react-ts-ff-trader/static/js/main.c6e848f0.js",
     "static/js/787.ff4191e0.chunk.js": "/react-ts-ff-trader/static/js/787.ff4191e0.chunk.js",
     "index.html": "/react-ts-ff-trader/index.html",
     "main.6577266a.css.map": "/react-ts-ff-trader/static/css/main.6577266a.css.map",
-    "main.625b074a.js.map": "/react-ts-ff-trader/static/js/main.625b074a.js.map",
+    "main.c6e848f0.js.map": "/react-ts-ff-trader/static/js/main.c6e848f0.js.map",
     "787.ff4191e0.chunk.js.map": "/react-ts-ff-trader/static/js/787.ff4191e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6577266a.css",
-    "static/js/main.625b074a.js"
+    "static/js/main.c6e848f0.js"
   ]
 }
