@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { Box, Button, Grid, Grommet, Text } from 'grommet';
+import { Routes, Route } from 'react-router-dom';
 import { logOut } from './actions/user';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from './store';
@@ -33,8 +34,14 @@ const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user, logOut
                 </Box> 
             </Box>
             <Box gridArea="main" fill gap="small">
-                {!user && <Logon />}
-                {user && <Dashboard user={user} />}
+                <Routes>
+                    {!user && <Route path="/" element={<Logon />} />}
+                    {
+                        user && <>
+                            <Route path="/" element={<Dashboard user={user} />} />
+                        </>
+                    }
+                </Routes>
             </Box>
         </Grid>
     </Grommet>
