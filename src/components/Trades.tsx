@@ -1,26 +1,38 @@
-import { Table } from 'antd';
+import { Table, TableBody, TableCell, TableHeader, TableRow } from 'grommet';
 import type { FunctionComponent } from 'react';
 import type { UserStat } from '../actions/dashboard';
 
 
-const columns: any[] = [
-    {title: 'Name', dataIndex: 'display_name', key: 'display_name'},
-    {title: 'Trades', dataIndex: 'trades', key: 'trades'},
-    {title: 'Balance Due', dataIndex: 'balance', key: 'balance'},
-];
-
-
 const Trades: FunctionComponent<{transactions: UserStat[]}> = ({ transactions }) => {
-    // create the table data
     return (
-        <div>
-            <Table 
-                rowKey="user_id"
-                columns={columns}
-                dataSource={transactions}
-                pagination={false}
-            />
-        </div>
+        <Table>
+            <TableHeader>
+                <TableRow>
+                    <TableCell scope="col" border="bottom">
+                        User
+                    </TableCell>
+                    <TableCell scope="col" border="bottom">
+                        Trades
+                    </TableCell>
+                    <TableCell scope="col" border="bottom">
+                        Balance Due
+                    </TableCell>
+                </TableRow>
+            </TableHeader>
+            <TableBody>
+                {
+                    transactions.map(({ display_name, trades, balance }) => {
+                        return (
+                            <TableRow>
+                                    <TableCell scope="row"><strong>{display_name}</strong></TableCell>
+                                    <TableCell>{trades}</TableCell>
+                                    <TableCell>${balance}</TableCell>
+                            </TableRow>
+                        )
+                    })
+                }
+            </TableBody>
+        </Table>
     )
 };
 

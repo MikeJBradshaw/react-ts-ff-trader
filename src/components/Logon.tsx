@@ -1,6 +1,6 @@
-import { Input, Button, Alert, Row, Col } from 'antd';
-import { updateUsername, loadUser } from '../actions/user';
 import { connect } from 'react-redux';
+import { Box, Button, TextInput} from 'grommet';
+import { updateUsername, loadUser } from '../actions/user';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from '../store';
 import type { FunctionComponent } from 'react';
@@ -12,31 +12,16 @@ const connector = connect(
 
 const UserLogon: FunctionComponent<ConnectedProps<typeof connector>> = ({
     username, updateUsername, loadUser, errorMessage
-}) => (<>
-    <Row className="user-logon-form"> 
-        <Col span={12} offset={6}>
-            <Input
-                onChange={(e) => updateUsername(e.target.value)}
-                placeholder="Sleeper Name"
-                value={username} />
-            <Button 
-                className="user-logon-button"
-                type="primary"
-                onClick={loadUser}
-                disabled={!username}>
-                    Get Me!
-            </Button>
-        </Col>
-    </Row>
-    {
-        errorMessage &&
-        <Row>
-            <Col span={12} offset={6}>
-                <Alert message="Error" description={errorMessage} type="error" showIcon />
-            </Col>
-        </Row>
-    }
-</>);
+}) => (
+    <Box direction="row" alignSelf="center" gap="medium" pad="25px">
+        <TextInput
+            onChange={(e) => updateUsername(e.target.value)}
+            placeholder="Sleeper Name"
+            value={username} 
+        />
+        <Button label="Get" onClick={loadUser} disabled={!username} />
+    </Box>
+    );
 
 
 export default connector(UserLogon);

@@ -1,29 +1,5 @@
-@import '~antd/dist/antd.css';
-
-.App {
-    margin: 0 20px;
+body {
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
 }
-
-/* .logon { */
-/*     flex: 1 1; */
-/*     flex-direction: column; */
-/*     align-items: center; */
-/*     justify-content: center; */
-/*     display: flex; */
-/*     height: 100vh; */
-/* } */
-
-.user-logon-button {
-    margin-top: 15px;
-}
-
-.user-logon-form {
-    padding: 10px;
-    margin-top: 100px;
-    text-align: center;
-}
-
-.summary-statistic {
-    margin: 15px;
-}
-
