@@ -24,9 +24,9 @@ const Trades: FunctionComponent<{transactions: UserStat[]}> = ({ transactions })
                     transactions.map(({ display_name, trades, balance }) => {
                         return (
                             <TableRow>
-                                    <TableCell scope="row"><strong>{display_name}</strong></TableCell>
-                                    <TableCell>{trades}</TableCell>
-                                    <TableCell>${balance}</TableCell>
+                                <TableCell scope="row"><strong>{display_name}</strong></TableCell>
+                                <TableCell>{trades}</TableCell>
+                                <TableCell>${balance}</TableCell>
                             </TableRow>
                         )
                     })

@@ -11,7 +11,7 @@ import Trades from './Trades';
 
 
 const connector = connect(
-     ({dashboard: { data, errorMessage, loading }}: RootState) => ({ data, errorMessage, loading }), // state
+    ({dashboard: { data, errorMessage, loading }}: RootState) => ({ data, errorMessage, loading }), // state
     { displayData, init } // actions
 );
 
@@ -37,9 +37,9 @@ const Dashboard: FunctionComponent<ConnectedProps<typeof connector> & {user: Use
                 </Box>
             }
             {
-                 errorMessage && <Card background="red" justify="center">
-                     <Text>{errorMessage}</Text>
-            </Card>
+                errorMessage && <Card background="red" justify="center">
+                    <Text>{errorMessage}</Text>
+                </Card>
             }
         </>
     );

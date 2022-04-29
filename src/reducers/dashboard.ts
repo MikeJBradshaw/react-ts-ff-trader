@@ -9,6 +9,7 @@ interface DashboardState {
     loading?: boolean;
 }
 
+
 const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {}, action) => {
         switch(action.type) {
             case DISPLAY_DATA:

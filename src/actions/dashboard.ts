@@ -1,6 +1,7 @@
 import type { User } from './user';
 
 
+// transaction info
 export interface Transaction {
     creator: string;
     status: string;
@@ -8,6 +9,7 @@ export interface Transaction {
 };
 
 
+// user info
 export interface UserStat {
     user_id: string;
     trades: number;
@@ -17,6 +19,8 @@ export interface UserStat {
 };
 
 
+
+// dashboard table
 export interface DashboardData {
     owners: User[];
     userStats: UserStat;
