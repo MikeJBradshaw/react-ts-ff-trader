@@ -1,4 +1,4 @@
-import { DISPLAY_DATA, INIT, LEAGUE_ERROR, LOAD_DATA } from '../actions/dashboard';
+import { DISPLAY_DATA, INIT, LEAGUE_ERROR, LOAD_DATA, UPDATE_LEAGUE } from '../actions/dashboard';
 import type { Reducer } from 'redux';
 import type { DashboardData, DashboardAction } from '../actions/dashboard';
 
@@ -23,6 +23,9 @@ const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {}, 
             case LOAD_DATA:
                 const { errorMessage, ...newState } = state;
                 return newState;
+
+            case UPDATE_LEAGUE:
+                return {...state, league: action.league};
 
             default:
                 return state;

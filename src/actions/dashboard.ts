@@ -19,12 +19,17 @@ export interface UserStat {
 };
 
 
+interface SelectedLeague {
+    name: string,
+    league_id: string
+}
 
 // dashboard table
 export interface DashboardData {
     owners: User[];
     userStats: UserStat;
     stats: UserStat[];
+    league?: SelectedLeague  // selected league to view
 };
 
 
@@ -48,4 +53,9 @@ export type LoadDataAction = {type: typeof LOAD_DATA};
 export const loadData = (): LoadDataAction => ({type: LOAD_DATA})
 
 
-export type DashboardAction = InitAction | DisplayDataAction | LoadDataAction | LeagueErrorAction;
+export const UPDATE_LEAGUE = 'UPDATE_LEAGUE';
+export type UpdateLeagueAction = {type: typeof UPDATE_LEAGUE, league: SelectedLeague};
+export const updateLeague = (league: SelectedLeague): UpdateLeagueAction => ({type: UPDATE_LEAGUE, league});
+
+
+export type DashboardAction = InitAction | DisplayDataAction | LoadDataAction | LeagueErrorAction | UpdateLeagueAction;

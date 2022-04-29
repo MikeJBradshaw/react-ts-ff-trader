@@ -1,24 +1,26 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Menu } from 'grommet';
+import { Box, Menu, Text } from 'grommet';
 import { init } from '../actions/leagues';
+import { updateLeague } from '../actions/dashboard';
 import type { FunctionComponent } from 'react';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from '../store';
 
 
 const connector = connect(
-    ({leagues: { leagues, error, loading }}: RootState) => ({ leagues, error, loading }),
-    { init }
+    ({
+        leagues: { leagues, error, loading },
+        dashboard: { league }
+    }: RootState) => ({ leagues, error, loading, league }),
+    { init, updateLeague }
 );
 
 
-const Leagues: FunctionComponent<ConnectedProps<typeof connector>> = ({ leagues, error, loading, init }) => {
+const Leagues: FunctionComponent<ConnectedProps<typeof connector>> = ({ leagues, error, loading, league, init, updateLeague }) => {
     useEffect(() => {
         init();
     }, []);
-
-    const [value, setValue] = useState<string>('');
 
     if (error) {
         return (<div>{error}</div>);
@@ -30,8 +32,8 @@ const Leagues: FunctionComponent<ConnectedProps<typeof connector>> = ({ leagues,
 
     return (
         <Menu
-            label="Leagues"
-            items={leagues.map(({ name, league_id }) => ({'label': name, onClick: () => console.log(league_id)}))}
+            label={ league ? league.name : 'Leagues' }
+            items={leagues.map(({ name, league_id }) => ({'label': name, onClick: () => updateLeague({name, league_id})}))}
         />
     );
 };

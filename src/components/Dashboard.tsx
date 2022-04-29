@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Box, Card, Spinner, Text } from 'grommet';
 import { displayData, init } from '../actions/dashboard';
@@ -10,17 +9,29 @@ import Trades from './Trades';
 
 
 const connector = connect(
-    ({dashboard: { errorMessage, loading, stats }}: RootState) => ({ errorMessage, loading, stats }), // state
+    ({dashboard: { errorMessage, league, loading, stats }}: RootState) => ({ errorMessage, league, loading, stats }), // state
     { displayData, init } // actions
 );
 
 
 const Dashboard: FunctionComponent<ConnectedProps<typeof connector>> = (
-    { errorMessage, loading, stats, displayData, init }
+    { errorMessage, league, loading, stats, displayData, init }
 ) => {
-    useEffect(() => {
-        init(); 
-    }, []);
+    if (loading) {
+        return (
+            <Box direction="row" justify="center">
+                <Spinner />
+            </Box>
+        );
+    }
+    
+    if (!league) {
+        return (
+            <Box direction="row" justify="center">
+                <Text> Select a League</Text>
+            </Box>
+        );
+    }
 
     return (
         <>
@@ -28,11 +39,6 @@ const Dashboard: FunctionComponent<ConnectedProps<typeof connector>> = (
                 stats && <Box fill>
                     <Summary />
                     <Trades transactions={stats} />
-                </Box>
-            }
-            {
-                loading && <Box direction="row" justify="center">
-                    <Spinner />
                 </Box>
             }
             {
