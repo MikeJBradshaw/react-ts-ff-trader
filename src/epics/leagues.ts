@@ -12,7 +12,7 @@ import type { LeaguesAction } from '../actions/leagues';
 const initLeaguesEpic = (action$: Observable<LeaguesAction>, state$: StateObservable<RootState>) => action$.pipe(
     ofType(INIT),
     switchMap(() => {
-        const {value: { user: { user: user_id }}} = state$;
+        const user_id = state$.value.user.user?.user_id as string;
 
         return fromFetch(
             `https://api.sleeper.app/v1/user/${user_id}/leagues/nfl/2021`,

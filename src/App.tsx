@@ -7,6 +7,7 @@ import type { RootState } from './store';
 import type { FunctionComponent } from 'react';
 import Logon from './components/Logon';
 import Dashboard from './components/Dashboard';
+import Leagues from './components/Leagues';
 import './App.css';
 
 
@@ -25,12 +26,14 @@ const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user, logOut
             ]}
         >
             <Box gridArea="header" background="brand" justify="between" direction="row" pad="small" fill>
-                <Box />
+                <Box direction="column" justify="center">
+                    {user && <Leagues />}
+                </Box>
                 <Box direction="column" justify="center">
                     <Text alignSelf="center">Trade Monitor</Text>
                 </Box>
                 <Box alignSelf="center">
-                    {user && <Button label="logout" onClick={() => logOut()} />}
+                    {user && <Button label="Log Out" onClick={() => logOut()} />}
                 </Box> 
             </Box>
             <Box gridArea="main" fill gap="small">
@@ -39,9 +42,7 @@ const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user, logOut
                         <Route path="/" element={<Logon />} />
                     }
                     {user &&
-                        <Route path="/" element={<Dashboard user={user} />}>
-                            <Route />
-                        </Route>
+                        <Route path="/" element={<Dashboard user={user} />} />
                     }
                 </Routes>
             </Box>

@@ -5,7 +5,7 @@ import leagues from './reducers/leagues';
 import dashboard from './reducers/dashboard';
 import dashboardEpic from './epics/dashboard';
 import userEpic from './epics/user';
-import leaguesEpic from './epics/user';
+import leaguesEpic from './epics/leagues';
 
 const reducers = combineReducers({ leagues, user, dashboard });                
 const epicMiddleware = createEpicMiddleware();
