@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-ts-ff-trader/static/css/main.4cabeb20.css",
-    "main.js": "/react-ts-ff-trader/static/js/main.e2272cff.js",
+    "main.js": "/react-ts-ff-trader/static/js/main.877439bd.js",
     "static/js/787.ff4191e0.chunk.js": "/react-ts-ff-trader/static/js/787.ff4191e0.chunk.js",
     "index.html": "/react-ts-ff-trader/index.html",
     "main.4cabeb20.css.map": "/react-ts-ff-trader/static/css/main.4cabeb20.css.map",
-    "main.e2272cff.js.map": "/react-ts-ff-trader/static/js/main.e2272cff.js.map",
+    "main.877439bd.js.map": "/react-ts-ff-trader/static/js/main.877439bd.js.map",
     "787.ff4191e0.chunk.js.map": "/react-ts-ff-trader/static/js/787.ff4191e0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.4cabeb20.css",
-    "static/js/main.e2272cff.js"
+    "static/js/main.877439bd.js"
   ]
 }
