@@ -1,14 +1,19 @@
 import { Avatar, Box, Heading, NameValueList, NameValuePair, Text } from 'grommet';
+import { connect } from 'react-redux';
 import type { FunctionComponent } from 'react';
-import type { User } from '../actions/user';
-import type { UserStat } from '../actions/dashboard';
+import type { ConnectedProps } from 'react-redux';
+import type { RootState } from '../store';
 
 
-const Summary: FunctionComponent<{user: User, stats: UserStat }> = (
-    {
-        user: { username, display_name, avatar }, 
-        stats: { trades, balance }
-    }
+const connector = connect(
+    ({
+        user: { avatar, display_name, username },
+        dashboard: { userStats, stats }
+    }: RootState) => ({ avatar, display_name, username, userStats, stats })
+);
+
+const Summary: FunctionComponent<ConnectedProps<typeof connector>> = (
+    { avatar, display_name, username, userStats, stats }
 ) => {
     const avatarStr = `https://sleepercdn.com/avatars/thumbs/${avatar}`;
 
@@ -22,10 +27,10 @@ const Summary: FunctionComponent<{user: User, stats: UserStat }> = (
             <Box width="medium" direction="row" margin={{"left": "60px"}}>
                 <NameValueList layout="column">
                     <NameValuePair name="Trades">
-                        <Text color="text-strong">{trades}</Text>
+                        <Text color="text-strong">{userStats?.trades}</Text>
                     </NameValuePair>
                     <NameValuePair name="Balance Due">
-                        <Text color="text-strong">${balance}</Text>
+                        <Text color="text-strong">${userStats?.balance}</Text>
                     </NameValuePair>
                 </NameValueList>
             </Box>
@@ -33,4 +38,4 @@ const Summary: FunctionComponent<{user: User, stats: UserStat }> = (
     )
 };
 
-export default Summary;
+export default connector(Summary);

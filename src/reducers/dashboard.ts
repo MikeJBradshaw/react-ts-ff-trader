@@ -3,8 +3,7 @@ import type { Reducer } from 'redux';
 import type { DashboardData, DashboardAction } from '../actions/dashboard';
 
 
-interface DashboardState {
-    data?: DashboardData;
+interface DashboardState extends Partial<DashboardData> {
     errorMessage?: string;
     loading?: boolean;
 }
@@ -13,7 +12,7 @@ interface DashboardState {
 const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {}, action) => {
         switch(action.type) {
             case DISPLAY_DATA:
-                return {...state, data: action.data, loading: false};
+                return {...state, ...action.data, loading: false};
 
             case INIT:
                 return {...state, loading: true};

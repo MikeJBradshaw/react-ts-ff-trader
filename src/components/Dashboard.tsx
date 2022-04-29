@@ -5,19 +5,18 @@ import { displayData, init } from '../actions/dashboard';
 import type { FunctionComponent } from 'react';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from '../store';
-import type { User } from '../actions/user';
 import Summary from './Summary';
 import Trades from './Trades';
 
 
 const connector = connect(
-    ({dashboard: { data, errorMessage, loading }}: RootState) => ({ data, errorMessage, loading }), // state
+    ({dashboard: { errorMessage, loading, stats }}: RootState) => ({ errorMessage, loading, stats }), // state
     { displayData, init } // actions
 );
 
 
-const Dashboard: FunctionComponent<ConnectedProps<typeof connector> & {user: User}> = (
-    { data, errorMessage, loading, user, displayData, init }
+const Dashboard: FunctionComponent<ConnectedProps<typeof connector>> = (
+    { errorMessage, loading, stats, displayData, init }
 ) => {
     useEffect(() => {
         init(); 
@@ -26,9 +25,9 @@ const Dashboard: FunctionComponent<ConnectedProps<typeof connector> & {user: Use
     return (
         <>
             {
-                data && <Box fill>
-                    <Summary user={user} stats={data.userStats} />
-                    <Trades transactions={data.stats} />
+                stats && <Box fill>
+                    <Summary />
+                    <Trades transactions={stats} />
                 </Box>
             }
             {

@@ -40,7 +40,7 @@ const initEpic = (action$: Observable<InitAction>, state$: StateObservable<RootS
             };
         });
 
-        const { user_id } = state$.value.user.user as User;
+        const { user_id } = state$.value.user as User;
         const userStats = stats.filter(({ user_id: id }) => id === user_id)[0];
 
         return displayData({ owners, userStats, stats });

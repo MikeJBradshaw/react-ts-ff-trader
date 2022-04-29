@@ -19,6 +19,7 @@ const loadUserEpic = (action$: Observable<LoadUserAction | UserErrorAction>, sta
         if (!user) {
             return userError('Username not found');
         }
+
         return updateUser(user);
     }))),
     catchError(err => of(userError(err.message)))

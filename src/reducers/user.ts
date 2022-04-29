@@ -3,9 +3,7 @@ import type { Reducer } from 'redux';
 import type { UserAction, User } from '../actions/user';
 
 
-interface UserState {
-    username: string;
-    user?: User;
+interface UserState extends Partial<User> {
     errorMessage?: string;
 }
 
@@ -16,7 +14,7 @@ if (userObject) {
     user = JSON.parse(userObject);
 }
 
-const userReducer: Reducer<UserState, UserAction> = (state = {username: user?.username ?? '', user}, action) => {
+const userReducer: Reducer<UserState, UserAction> = (state = {...user}, action) => {
     console.log(action);
     switch(action.type) {
         case LOAD_USER:
@@ -32,7 +30,7 @@ const userReducer: Reducer<UserState, UserAction> = (state = {username: user?.us
 
         case UPDATE_USER:
             window.localStorage.setItem('user', JSON.stringify(action.user));
-            return {...state, user: action.user};
+            return {...state, ...action.user};
 
         case USER_ERROR:
             return {...state, errorMessage: action.message};
