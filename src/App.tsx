@@ -1,40 +1,33 @@
 import { connect } from 'react-redux';
-import { Box, Button, Grid, Grommet, Text } from 'grommet';
-import { logOut } from './actions/user';
+import { Box, Grid, Grommet } from 'grommet';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from './store';
 import type { FunctionComponent } from 'react';
 import Logon from './components/Logon';
 import Dashboard from './components/Dashboard';
-import Leagues from './components/Leagues';
+import Header from './components/Header';
+import NavBar from './components/NavBar';
 import './App.css';
 
 
-const connector = connect(({user: { user_id }}: RootState) => ({ user_id}), { logOut });
+const connector = connect(({user: { user_id }}: RootState) => ({ user_id }));
 
 
-const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user_id, logOut }) => (
+const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user_id }) => (
     <Grommet className="app">
         <Grid
             fill
             rows={['55px', 'auto']}
-            columns={['auto']}
+            columns={['65px', 'auto']}
+            gap="small"
             areas={[
                 { name: 'header', start: [0, 0], end: [1, 0] },
-                { name: 'main', start: [0, 1], end: [1, 1] },
+                { name: 'nav', start: [0, 1], end: [0, 1] },
+                { name: 'main', start: [1, 1], end: [1, 1] },
             ]}
         >
-            <Box gridArea="header" background="brand" justify="between" direction="row" pad="small" fill>
-                <Box direction="column" justify="center">
-                    {user_id && <Leagues />}
-                </Box>
-                <Box direction="column" justify="center">
-                    <Text alignSelf="center">Trade Monitor</Text>
-                </Box>
-                <Box alignSelf="center">
-                    {user_id && <Button label="Log Out" onClick={() => logOut()} />}
-                </Box> 
-            </Box>
+            <Header />
+            { user_id && <NavBar /> }
             <Box gridArea="main" fill gap="small">
                 {!user_id && <Logon /> }
                 {user_id && <Dashboard />}
