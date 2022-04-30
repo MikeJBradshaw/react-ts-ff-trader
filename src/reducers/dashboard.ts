@@ -1,6 +1,8 @@
 import { DISPLAY_DATA, INIT, LEAGUE_ERROR, LOAD_DATA, UPDATE_LEAGUE } from '../actions/dashboard';
+import { LOG_OUT } from '../actions/user';
 import type { Reducer } from 'redux';
 import type { DashboardData, DashboardAction } from '../actions/dashboard';
+import type { LogOutAction } from '../actions/user';
 
 
 interface DashboardState extends Partial<DashboardData> {
@@ -9,27 +11,30 @@ interface DashboardState extends Partial<DashboardData> {
 }
 
 
-const dashboardReducer: Reducer<DashboardState, DashboardAction> = (state = {}, action) => {
-        switch(action.type) {
-            case DISPLAY_DATA:
-                return {...state, ...action.data, loading: false};
+const dashboardReducer: Reducer<DashboardState, DashboardAction | LogOutAction> = (state = {}, action) => {
+    switch(action.type) {
+        case DISPLAY_DATA:
+            return {...state, ...action.data, loading: false};
 
-            case INIT:
-                return {...state, loading: true};
+        case INIT:
+            return {...state, loading: true};
 
-            case LEAGUE_ERROR:
-                return {...state, errorMessage: action.message};
+        case LEAGUE_ERROR:
+            return {...state, errorMessage: action.message};
 
-            case LOAD_DATA:
-                const { errorMessage, ...newState } = state;
-                return newState;
+        case LOAD_DATA:
+            const { errorMessage, ...newState } = state;
+        return newState;
 
-            case UPDATE_LEAGUE:
-                return {...state, league: action.league};
+        case LOG_OUT:
+            return {loading: false, leagues: []};
 
-            default:
-                return state;
-        }
+        case UPDATE_LEAGUE:
+            return {...state, league: action.league};
+
+        default:
+            return state;
+    }
 };
 
 
