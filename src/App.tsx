@@ -18,7 +18,7 @@ const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user_id }) =
         <Grid
             fill
             rows={['55px', 'auto']}
-            columns={['65px', 'auto']}
+            columns={['75px', 'auto']}
             gap="small"
             areas={[
                 { name: 'header', start: [0, 0], end: [1, 0] },
