@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
-import { Box, Grid, Grommet } from 'grommet';
+import { Grid, Grommet } from 'grommet';
 import type { ConnectedProps } from 'react-redux';
 import type { RootState } from './store';
 import type { FunctionComponent } from 'react';
-import Logon from './components/Logon';
-import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import NavBar from './components/NavBar';
+import AppRoutes from './components/AppRoutes';
 import './App.css';
 
 
@@ -28,10 +27,7 @@ const App: FunctionComponent<ConnectedProps<typeof connector>> = ({ user_id }) =
         >
             <Header />
             { user_id && <NavBar /> }
-            <Box gridArea="main" fill gap="small">
-                {!user_id && <Logon /> }
-                {user_id && <Dashboard />}
-            </Box>
+            <AppRoutes />
         </Grid>
     </Grommet>
 );
